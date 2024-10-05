@@ -155,6 +155,7 @@
                             <license>file:${basedir}/LICENSE</license>
                             <excludes>
                                 <exclude>checkstyle:/src/main/java/module-info.java</exclude>
+                                <exclude>dependencies:org.hamcrest</exclude>
                                 <exclude>duplicatefinder:.*</exclude>
                             </excludes>
                         </configuration>
