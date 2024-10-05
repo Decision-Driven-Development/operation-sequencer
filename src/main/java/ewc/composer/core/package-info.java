@@ -43,4 +43,6 @@
 /**
  * Root package for the module.
  */
+// @todo #1 Implement basic OperationChain class
+// @todo #1 Implement basic inheritable ChainContext class
 package ewc.composer.core;
