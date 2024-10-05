@@ -22,26 +22,38 @@
  * SOFTWARE.
  */
 
-/*
- * Copyright Eugene Terekhov.
- *
- * This file is part of operation-sequencer.
- *
- * operation-sequencer is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3
- * or any later version as published by the Free Software Foundation.
- *
- * operation-sequencer is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with operation-sequencer.  If not, see <https://www.gnu.org/licenses/>.
- */
+package ewc.composer.core;
+
+import java.util.List;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 /**
- * Root package for the module.
+ * I am a test for the {@link ChainContext}.
+ *
+ * @since 0.1.0
  */
-// @todo #1 Implement basic OperationChain class
-package ewc.composer.core;
+final class ChainContextTest {
+    @Test
+    void shouldGetValueOutOfContext() {
+        final ChainContext target = new ChainContext();
+        final List<String> actual = target.fetch("data-by-key");
+        MatcherAssert.assertThat(
+            "Should be empty for a non-existent key?",
+            actual,
+            Matchers.empty()
+        );
+    }
+
+    @Test
+    void shouldBeAbleToAddNewData() {
+        final ChainContext target = new ChainContext();
+        target.add("data-by-key", () -> List.of("value"));
+        MatcherAssert.assertThat(
+            "Should be able to add and retrieve data",
+            target.fetch("data-by-key"),
+            Matchers.contains("value")
+        );
+    }
+}
